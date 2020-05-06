@@ -21,6 +21,19 @@ export default (props) => {
       );
     });
 
+    const renderRow = (props) => {
+      const { index } = props;
+      const todo = todoItems[index];
+      return (
+        <TodoItem
+          key={todo.id}
+          todo={todo}
+          index={index}
+          length={todoItems.length}
+        />
+      );
+    };
+
     return <List>{listItems}</List>;
   } else {
     return null;

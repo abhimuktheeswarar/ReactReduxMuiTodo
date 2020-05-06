@@ -35,10 +35,17 @@ export default () => {
       <Form
         onSubmit={onSubmit}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
-          <form className={classes.form} onSubmit={handleSubmit}>
+          <form
+            className={classes.form}
+            onSubmit={async (event) => {
+              await handleSubmit(event);
+              form.reset();
+            }}
+          >
             <TextField
               className={classes.textField}
               fullWidth
+              required
               name="title"
               label="What you want to do?"
               type="text"
