@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Form, Field } from "react-final-form";
+import { useDispatch } from "react-redux";
+import { Form } from "react-final-form";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Paper } from "@material-ui/core";
 import { TextField } from "mui-rff";
+import { addTodo } from "./homeSlice";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,10 +21,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default () => {
   const [formState, setFormState] = useState();
+  const dispatch = useDispatch();
   const onSubmit = async (values) => {
     console.log(JSON.stringify(values, 0, 2));
-    setFormState(values);
-    console.log(formState);
+    //setFormState(values);
+    //console.log(formState);
+    dispatch(addTodo(values));
   };
   const classes = useStyles();
 

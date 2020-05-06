@@ -17,6 +17,7 @@ export const getTodoItemsFromNetwork = createAsyncThunk(
 
 export const todosAdapter = createEntityAdapter({
   loading: false,
+  sortComparer: (a, b) => b.id - a.id,
 });
 const initialState = todosAdapter.getInitialState();
 
@@ -24,6 +25,11 @@ export const homeSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
+    addTodo: (state, { payload }) => {
+      const id = state.ids.length + 1;
+      const todo = { id, userId: 1, completed: false, ...payload };
+      todosAdapter.addOne(state, todo);
+    },
     updateTodoStatus: (state, { payload }) => {
       const { id, ...changes } = payload;
       todosAdapter.updateOne(state, { id, changes });
@@ -40,7 +46,7 @@ export const homeSlice = createSlice({
   },
 });
 
-export const { getTodoItems, updateTodoStatus } = homeSlice.actions;
+export const { getTodoItems, updateTodoStatus, addTodo } = homeSlice.actions;
 
 export const loading = (state) => state.todos.loading;
 
