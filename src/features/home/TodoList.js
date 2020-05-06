@@ -44,7 +44,14 @@ export default () => {
   if (todoItems && !isEmpty(todoItems)) {
     console.log("render TodoList");
     const listItems = todoItems.map((todo, index) => {
-      return <TodoItem key={todo.id} />;
+      return (
+        <TodoItem
+          key={todo.id}
+          todo={todo}
+          index={index}
+          length={todoItems.length}
+        />
+      );
     });
 
     return <List>{listItems}</List>;
