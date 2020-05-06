@@ -4,20 +4,6 @@ import {
   createEntityAdapter,
 } from "@reduxjs/toolkit";
 import axios from "axios";
-import _ from "lodash";
-
-// const dummyTodoItems = [
-//   {
-//     id: 1,
-//     title: "Test 1",
-//     status: "NOT_COMPLETED",
-//   },
-//   {
-//     id: 2,
-//     title: "Test 2",
-//     status: "COMPLETED",
-//   },
-// ];
 
 export const getTodoItemsFromNetwork = createAsyncThunk(
   "todos/getTodoItemsFromNetwork",
@@ -28,13 +14,6 @@ export const getTodoItemsFromNetwork = createAsyncThunk(
     return response.data;
   }
 );
-
-// export const getTodoItemsFromNetwork = () => async (dispatch) => {
-//   const response = await axios.get(
-//     "https://jsonplaceholder.typicode.com/todos"
-//   );
-//   dispatch(getTodoItems(_.mapKeys(response.data, "id")));
-// };
 
 export const todosAdapter = createEntityAdapter({
   loading: false,
@@ -63,7 +42,7 @@ export const homeSlice = createSlice({
 
 export const { getTodoItems, updateTodoStatus } = homeSlice.actions;
 
-//export const selectTodoItems = (state) => state.todoItems.value;
+export const loading = (state) => state.todos.loading;
 
 export const { selectAll: selectTodoItems } = todosAdapter.getSelectors(
   (state) => state.todos

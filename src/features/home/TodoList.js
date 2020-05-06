@@ -1,45 +1,12 @@
-import React, { useState, useEffect, useReducer, Fragment } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  selectTodoItems,
-  getTodoItems,
-  getTodoItemsFromNetwork,
-  updateTodoStatus,
-} from "./homeSlice";
-import homeReducer from "./homeSlice";
-import {
-  Checkbox,
-  CircularProgress,
-  Container,
-  Divider,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Paper,
-  Typography,
-} from "@material-ui/core";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import React from "react";
+import { useSelector } from "react-redux";
+import { List } from "@material-ui/core";
+import { selectTodoItems } from "./homeSlice";
 import { isEmpty } from "lodash";
 import TodoItem from "./TodoItem";
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
-}));
-
-export default () => {
+export default (props) => {
   const todoItems = useSelector(selectTodoItems);
-  const dispatch = useDispatch();
-  //const [items, setItems] = useState(todoItems);
-  //const [state, dispatch] = useReducer(homeReducer, todoItems);
-
-  useEffect(() => {
-    console.log("didMount");
-    dispatch(getTodoItemsFromNetwork());
-  }, []);
 
   if (todoItems && !isEmpty(todoItems)) {
     console.log("render TodoList");
@@ -56,7 +23,6 @@ export default () => {
 
     return <List>{listItems}</List>;
   } else {
-    console.log("render CircularProgress");
-    return <CircularProgress />;
+    return null;
   }
 };

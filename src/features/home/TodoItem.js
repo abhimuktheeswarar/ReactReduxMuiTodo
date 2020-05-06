@@ -1,18 +1,6 @@
-import React, {
-  useState,
-  useEffect,
-  useReducer,
-  useMemo,
-  Fragment,
-  memo,
-} from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  selectTodoItems,
-  getTodoItems,
-  getTodoItemsFromNetwork,
-  updateTodoStatus,
-} from "./homeSlice";
+import React, { Fragment, memo } from "react";
+import { useDispatch } from "react-redux";
+import { updateTodoStatus } from "./homeSlice";
 import {
   Checkbox,
   Divider,
@@ -25,9 +13,6 @@ export default memo((props) => {
   const todo = props.todo;
   const index = props.index;
   const length = props.length;
-
-  //const [index, setIndex] = useState(props.index);
-  //const [todo, setTodo] = useState(props.todo);
 
   const dispatch = useDispatch();
 
