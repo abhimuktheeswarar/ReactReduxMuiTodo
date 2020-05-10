@@ -38,6 +38,14 @@ export const updateTodoItemStatus = createAsyncThunk(
   }
 );
 
+export const deleteTodoItem = createAsyncThunk(
+  "todos/deleteTodoItem",
+  async (id, thunkAPI) => {
+    await axios.delete(`http://localhost:3000/todos/${id}`);
+    return id;
+  }
+);
+
 export const todosAdapter = createEntityAdapter({
   loading: false,
   sortComparer: (a, b) => b.id - a.id,
@@ -62,6 +70,9 @@ export const homeSlice = createSlice({
     builder.addCase(getTodoItemsFromNetwork.fulfilled, (state, action) => {
       todosAdapter.upsertMany(state, action.payload);
       state.loading = false;
+    });
+    builder.addCase(deleteTodoItem.fulfilled, (state, action) => {
+      todosAdapter.removeOne(state, action.payload);
     });
   },
 });
