@@ -39,6 +39,12 @@ export default () => {
           </ListItemIcon>
           <ListItemText primary="Dashboard" />
         </ListItem>
+        <ListItem button component={Link} to="/virtual">
+          <ListItemIcon>
+            <DashboardIcon />
+          </ListItemIcon>
+          <ListItemText primary="Virtual" />
+        </ListItem>
       </List>
     </Drawer>
   );

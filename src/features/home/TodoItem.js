@@ -1,4 +1,4 @@
-import React, { Fragment, memo, useState } from "react";
+import React, { Fragment, useState, memo } from "react";
 import { useDispatch } from "react-redux";
 import { updateTodoItemStatus, deleteTodoItem } from "./homeSlice";
 import {
@@ -15,6 +15,7 @@ import AlertDialog from "../../common/dialog/Dialogs";
 
 export default memo((props) => {
   const todo = props.todo;
+  const key = todo.id;
   const index = props.index;
   const length = props.length;
 
@@ -48,9 +49,9 @@ export default memo((props) => {
 
   console.log("render TodoItem");
 
-  const style = todo.completed ? { textDecoration: "line-through" } : {};
+  const textStyle = todo.completed ? { textDecoration: "line-through" } : {};
   return (
-    <Fragment>
+    <div ref={props.registerChild} key={todo.id} style={props.style}>
       <ListItem>
         <ListItemIcon>
           <Checkbox
@@ -59,25 +60,23 @@ export default memo((props) => {
             onChange={handleCheckboxChange}
           />
         </ListItemIcon>
-        <ListItemText primary={todo.title} style={style} />
-        <ListItemSecondaryAction>
-          <IconButton
-            edge="end"
-            aria-label="delete"
-            id={todo.id}
-            onClick={() => {
-              onClickDelete(todo.id);
-            }}
-          >
-            <DeleteIcon />
-          </IconButton>
-        </ListItemSecondaryAction>
+        <ListItemText primary={todo.title} style={textStyle} />
+        <Fragment>
+          <ListItemSecondaryAction>
+            <IconButton
+              edge="end"
+              aria-label="delete"
+              id={todo.id}
+              onClick={() => {
+                onClickDelete(todo.id);
+              }}
+            >
+              <DeleteIcon />
+            </IconButton>
+          </ListItemSecondaryAction>
+        </Fragment>
       </ListItem>
-      {(() => {
-        if (index !== length - 1) {
-          return <Divider key={`div${todo.id}`} />;
-        }
-      })()}
+
       <AlertDialog
         id={todo.id}
         show={showDeleteConfirmationDialog}
@@ -85,6 +84,11 @@ export default memo((props) => {
         onClickPositive={onClickPositive}
         onClickNegative={onClickNegative}
       />
-    </Fragment>
+      {(() => {
+        if (index !== length - 1) {
+          return <Divider key={`div${todo.id}`} />;
+        }
+      })()}
+    </div>
   );
 });

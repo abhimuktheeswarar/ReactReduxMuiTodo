@@ -7,6 +7,7 @@ import AppBarComponent from "../common/appbar/AppBarComponent";
 import SideBar from "../common/sidebar/SideBar";
 import HomeComponent from "../features/home/HomeCoponent";
 import { Counter } from "../features/counter/Counter";
+import VirtualList from "../features/sample/VirtualList";
 import history from "./history";
 
 const useStyles = makeStyles((theme) => ({
@@ -55,6 +56,7 @@ export default () => {
           <Switch>
             <Route exact path="/" component={HomeComponent} />
             <Route exact path="/counter" component={Counter} />
+            <Route exact path="/virtual" component={VirtualList} />
           </Switch>
         </main>
       </Router>

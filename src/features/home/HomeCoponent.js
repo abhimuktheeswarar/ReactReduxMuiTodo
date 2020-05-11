@@ -28,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
   },
   paperTodoList: {
     marginTop: theme.spacing(4),
+    width: "100%",
+    height: "70vh",
   },
 }));
 
