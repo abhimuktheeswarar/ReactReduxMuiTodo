@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Drawer,
   List,
@@ -32,7 +33,7 @@ export default () => {
     >
       <Toolbar />
       <List>
-        <ListItem button>
+        <ListItem button component={Link} to="/counter">
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>

@@ -38,25 +38,26 @@ const Base = () => {
     </div>
   );
 };
+
 export default () => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <AppBarComponent />
-      <Hidden smDown>
-        <SideBar />
-      </Hidden>
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Router history={history}>
+      <Router history={history}>
+        <CssBaseline />
+        <AppBarComponent />
+        <Hidden smDown>
+          <SideBar />
+        </Hidden>
+        <main className={classes.content}>
+          <div className={classes.appBarSpacer} />
           <Switch>
             <Route exact path="/" component={HomeComponent} />
             <Route exact path="/counter" component={Counter} />
           </Switch>
-        </Router>
-      </main>
+        </main>
+      </Router>
     </div>
   );
 };
