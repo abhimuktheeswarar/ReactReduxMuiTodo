@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import {
   Drawer,
   List,
@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default () => {
   const classes = useStyles();
+  let { path, url } = useRouteMatch();
   return (
     <Drawer
       variant="permanent"
@@ -33,13 +34,13 @@ export default () => {
     >
       <Toolbar />
       <List>
-        <ListItem button component={Link} to="/counter">
+        <ListItem button component={Link} to={`/counter`}>
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>
           <ListItemText primary="Dashboard" />
         </ListItem>
-        <ListItem button component={Link} to="/virtual">
+        <ListItem button component={Link} to={`/virtual`}>
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>

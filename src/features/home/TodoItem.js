@@ -47,7 +47,7 @@ export default memo((props) => {
     console.log(`id = ${id}`);
   };
 
-  console.log("render TodoItem");
+  //console.log("render TodoItem");
 
   const textStyle = todo.completed ? { textDecoration: "line-through" } : {};
   return (
